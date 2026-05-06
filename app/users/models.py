@@ -7,7 +7,7 @@ class Users(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    email = Column(String, unique=True ,nullable=False)
     hashed_password = Column(String, nullable=False)
 
-    order = relationship("Users", back_populates="user")
+    orders = relationship("Orders", back_populates="user")
