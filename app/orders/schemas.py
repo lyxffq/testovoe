@@ -1,6 +1,11 @@
 from pydantic import BaseModel
 from typing import List, Dict
 from datetime import datetime
+from app.orders.models import OrderStatus
+
+
+class OrderUpdateStatus(BaseModel):
+    status: OrderStatus
 
 
 class OrderItem(BaseModel):

@@ -6,7 +6,7 @@ from datetime import datetime
 
 from app.database import Base
 
-class OrderStatus(enum.Enum):
+class OrderStatus(str, enum.Enum):
     PENDING = "PENDING"
     PAID = "PAID"
     SHIPPED = "SHIPPED"
