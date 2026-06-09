@@ -13,10 +13,6 @@ router = APIRouter(
 
 @router.post("/register/")
 async def register_user(user_data: UserRegister):
-    print("RAW USER DATA:", user_data)
-    print("PASSWORD:", user_data.password)
-    print("TYPE:", type(user_data.password))
-    print("LEN:", len(user_data.password))
     existing_user = await UsersDAO.find_one_or_none(email=user_data.email)
 
     if existing_user:

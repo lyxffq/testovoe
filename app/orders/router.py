@@ -11,7 +11,8 @@ from app.users.models import Users
 from app.orders.dao import OrdersDAO
 from app.orders.schemas import OrderCreate, OrderResponse, OrderUpdateStatus
 from app.auth.dependencies import get_current_user
-from app.tasks.producer import produce_new_order
+from app.messaging.producer import publish_new_order
+
 
 router = APIRouter(
     prefix="/orders",
@@ -33,7 +34,7 @@ async def create_order(
         created_at=datetime.utcnow()
     )
 
-    await produce_new_order(str(order.id))
+    await publish_new_order(str(order.id))
 
     return order
 
