@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError, ExpiredSignatureError
 
 from app.config import settings
-from app.users.dao import UsersDAO
+from app.users.repository import UsersRepository
 from app.exceptions import IncorrectTokenFormatException, UserIsNotPresentException, TokenExpiredException
 
 
@@ -28,7 +28,7 @@ async def get_current_user(request: Request):
     if not user_id:
         raise UserIsNotPresentException
 
-    user = await UsersDAO.find_one_or_none(id=int(user_id))
+    user = await UsersRepository.find_one_or_none(id=int(user_id))
     if not user:
         raise UserIsNotPresentException
 
