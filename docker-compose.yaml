@@ -1,11 +1,11 @@
-version: '3.9'
+version: '3'
 
 services:
 
   api:
     build:
       context: .
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    command: sh ./entrypoint.sh
     env_file:
       - .env.docker
     volumes:
@@ -40,7 +40,7 @@ services:
       - rabbitmq
 
   postgres:
-    image: postgres:18
+    image: postgres:17
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -52,13 +52,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:5
+    image: redis:7
     restart: always
     ports:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:4.3
+    image: rabbitmq
     restart: always
     ports:
       - "5672:5672"
